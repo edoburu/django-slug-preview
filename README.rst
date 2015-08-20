@@ -7,6 +7,12 @@ This is inspired by the "Permalink" preview that WordPress offers.
 While not looking as fancy yet, this is a good start for Django projects.
 Improvements are welcome!
 
+
+.. figure:: https://github.com/edoburu/django-slug-preview/raw/master/docs/images/slugpreview1.png
+   :width: 632px
+   :height: 95px
+
+
 Installation
 ============
 
