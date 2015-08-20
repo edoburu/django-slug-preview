@@ -1,0 +1,9 @@
+.slugpreview {
+  display: inline-block;
+  color: #333;
+}
+
+.slugpreview .url-slug {
+  padding-left: 4px;
+  padding-right: 4px;
+}

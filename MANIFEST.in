@@ -1,0 +1,10 @@
+include AUTHORS
+include README.rst
+include LICENSE
+recursive-include fluent_contents/static *
+global-exclude .DS_Store
+global-exclude Thumbs.db
+global-exclude Desktop.ini
+global-exclude *.swp
+global-exclude *~
+global-exclude *.bak
