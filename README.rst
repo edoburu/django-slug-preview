@@ -96,7 +96,7 @@ For example::
             else:
                 return "/{slug}/"
 
-For a blog, you can add the :samp:`/blog/{year}/{month}/` format too::
+For a blog, you can add the ``/blog/{year}/{month}/`` format too::
 
     from django.core.urlresolvers import reverse
     from django.db import models
