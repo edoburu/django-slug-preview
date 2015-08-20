@@ -1,7 +1,7 @@
 include AUTHORS
 include README.rst
 include LICENSE
-recursive-include fluent_contents/static *
+recursive-include slug_preview/static *
 global-exclude .DS_Store
 global-exclude Thumbs.db
 global-exclude Desktop.ini
