@@ -32,7 +32,7 @@ class BoundSlugField(BoundField):
 
 UPGRADED_CLASSES = {}
 def _upgrade_boundfield_class(cls):
-    if cls is BoundField or cls is BoundSlugField
+    if cls is BoundField or cls is BoundSlugField:
         return BoundSlugField
 
     # When some other package also performs this same trick,
