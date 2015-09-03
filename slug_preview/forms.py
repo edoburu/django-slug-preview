@@ -32,8 +32,10 @@ class BoundSlugField(BoundField):
 
 UPGRADED_CLASSES = {}
 def _upgrade_boundfield_class(cls):
-    if cls is BoundField or cls is BoundSlugField:
+    if cls is BoundField:
         return BoundSlugField
+    elif issubclass(cls, BoundSlugField):
+        return cls
 
     # When some other package also performs this same trick,
     # combine both classes on the fly. Avoid having to do that each time.
