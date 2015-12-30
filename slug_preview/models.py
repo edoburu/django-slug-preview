@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.encoding import force_text
 from . import forms
 from .slugify import slugify, django_slugify
 from .validators import ValidateSlug
@@ -50,6 +51,7 @@ class SlugPreviewField(models.SlugField):
         # Make sure the slugify logic is applied,
         # even on manually entered input.
         if value:
+            value = force_text(value)
             slug = self.slugify(value)
             if self.max_length < len(slug):
                 slug = slug[:self.max_length]
