@@ -60,6 +60,12 @@ class SlugPreviewField(models.SlugField):
         setattr(instance, self.name, slug)
         return slug
 
+    def south_field_triple(self):
+        from south.modelsinspector import introspector
+        path = "{0}.{1}".format(self.__class__.__module__, self.__class__.__name__)
+        args, kwargs = introspector(self)
+        return (path, args, kwargs)
+
 
 # Avoid using AdminTextInputWidget
 if 'django.contrib.admin' in settings.INSTALLED_APPS:
