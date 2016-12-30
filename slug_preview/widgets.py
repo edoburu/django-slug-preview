@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import re
 from django.forms import widgets
 from django.utils.html import format_html
