@@ -25,7 +25,9 @@ Or the current folder can be installed for development::
 
     pip install -e .
 
-Add ``slug_preview`` to your ``INSTALLED_APPS``::
+Add ``slug_preview`` to your ``INSTALLED_APPS``:
+
+.. code-block:: python
 
     INSTALLED_APPS += (
         'slug_preview',
@@ -38,7 +40,9 @@ Usage
 * Use ``slug_preview.models.SlugPreviewField`` in your models instead of the standard ``models.SlugField``.
 * Add ``slug_preview.forms.SlugPreviewFormMixin`` in your forms.
 
-For example::
+For example:
+
+.. code-block:: python
 
     from django.db import models
     from slug_preview.models import SlugPreviewField
@@ -47,7 +51,9 @@ For example::
         slug = SlugPreviewField(_("Slug"))
 
 
-In the admin you can use the ``SlugPreviewModelForm`` shortcut::
+In the admin you can use the ``SlugPreviewModelForm`` shortcut:
+
+.. code-block:: python
 
     from django.contrib import admin
     from django import forms
@@ -58,7 +64,9 @@ In the admin you can use the ``SlugPreviewModelForm`` shortcut::
         form = SlugPreviewModelForm
 
 
-In custom forms, use ``SlugPreviewFormMixin`` directly::
+In custom forms, use ``SlugPreviewFormMixin`` directly:
+
+.. code-block:: python
 
     from django import forms
     from slug_preview.forms import SlugPreviewFormMixin
@@ -73,7 +81,9 @@ Special model URLS
 ~~~~~~~~~~~~~~~~~~
 
 When a model has a custom URL layout (not just ``/{slug}/``), you can add a ``get_absolute_url_format()`` method in the model.
-For example::
+For example:
+
+.. code-block:: python
 
     from django.db import models
     from slug_preview.models import SlugPreviewField
@@ -96,7 +106,9 @@ For example::
             else:
                 return "/{slug}/"
 
-For a blog, you can add the ``/blog/{year}/{month}/`` format too::
+For a blog, you can add the ``/blog/{year}/{month}/`` format too:
+
+.. code-block:: python
 
     from django.core.urlresolvers import reverse
     from django.db import models
