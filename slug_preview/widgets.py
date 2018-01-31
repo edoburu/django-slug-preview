@@ -26,10 +26,10 @@ class SlugPreviewWidget(widgets.TextInput):
         self.url_format = url_format
         self.instance = None   # assigned via BoundSlugField
 
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, **kwargs):
         if attrs is None:
             attrs = {}
-        input_tag = super(SlugPreviewWidget, self).render(name, value, attrs=attrs)
+        input_tag = super(SlugPreviewWidget, self).render(name, value, attrs=attrs, **kwargs)
         return format_html('<kbd class="slugpreview">{0}</kbd>', self.render_preview(input_tag))
 
     def render_preview(self, input_tag):
