@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 1.0.4 (2018-02-12)
+--------------------------
+
+* Fixed admin media ordering for Django 2.0
+
+
 Version 1.0.3 (2018-02-12)
 --------------------------
 
