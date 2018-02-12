@@ -1,6 +1,12 @@
 Changelog
 =========
 
+Version 1.0.3 (2018-02-12)
+--------------------------
+
+* Fixed upcoming Django 2.1 deprecation
+
+
 Version 1.0.2 (2016-12-30)
 --------------------------
 
