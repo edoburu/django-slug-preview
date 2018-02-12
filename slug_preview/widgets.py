@@ -1,8 +1,9 @@
 from __future__ import unicode_literals
 import re
+
+from django.conf import settings
 from django.forms import widgets
 from django.utils.html import format_html
-from django.utils.translation import ugettext
 
 
 class SlugPreviewWidget(widgets.TextInput):
@@ -16,8 +17,10 @@ class SlugPreviewWidget(widgets.TextInput):
             )
         }
         js=(
+            'admin/js/vendor/jquery/jquery{}.js'.format('' if settings.DEBUG else '.min'),
+            'admin/js/jquery.init.js',
             'admin/js/urlify.js',
-            'admin/js/prepopulate.min.js',
+            'admin/js/prepopulate{}.js'.format('' if settings.DEBUG else '.min'),
             'slug_preview/js/slug_preview.js',
         )
 
