@@ -108,13 +108,12 @@ For a blog, you can add the ``/blog/{year}/{month}/`` format too::
         pubdate = models.DateTimeField(default=now)
         # ...
 
-
         def get_absolute_url(self):
             root = reverse('article_list')
             return "{root}/{year}/{month}/{slug}/".format(
                 root=reverse('article_list').rstrip('/'),
-                year=self.pubdate..strftime('%Y'),
-                monthy=self.pubdate..strftime('%M'),
+                year=self.pubdate.strftime('%Y'),
+                monthy=self.pubdate.strftime('%M'),
                 slug=self.slug
             )
 
