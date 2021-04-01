@@ -1,5 +1,5 @@
 from django import forms
-from django.forms.forms import BoundField
+from django.forms import BoundField
 from . import widgets
 from .slugify import slugify, django_slugify
 from .validators import ValidateSlug
