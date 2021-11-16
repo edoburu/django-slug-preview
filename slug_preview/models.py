@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db import models
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from . import forms
 from .slugify import slugify, django_slugify
 from .validators import ValidateSlug
@@ -20,7 +20,7 @@ class SlugPreviewField(models.SlugField):
             # This replaces the 'default_validators' setting at object level.
             self.default_validators = [ValidateSlug(self.slugify)]
 
-        super(SlugPreviewField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def formfield(self, **kwargs):
         # Pass our custom settings to the form field
@@ -32,7 +32,7 @@ class SlugPreviewField(models.SlugField):
             'url_format': self.url_format,
         }
         defaults.update(kwargs)
-        return super(SlugPreviewField, self).formfield(**defaults)
+        return super().formfield(**defaults)
 
     def pre_save(self, instance, add):
         """
@@ -51,7 +51,7 @@ class SlugPreviewField(models.SlugField):
         # Make sure the slugify logic is applied,
         # even on manually entered input.
         if value:
-            value = force_text(value)
+            value = force_str(value)
             slug = self.slugify(value)
             if self.max_length < len(slug):
                 slug = slug[:self.max_length]
@@ -62,7 +62,7 @@ class SlugPreviewField(models.SlugField):
 
     def south_field_triple(self):
         from south.modelsinspector import introspector
-        path = "{0}.{1}".format(self.__class__.__module__, self.__class__.__name__)
+        path = f"{self.__class__.__module__}.{self.__class__.__name__}"
         args, kwargs = introspector(self)
         return (path, args, kwargs)
 

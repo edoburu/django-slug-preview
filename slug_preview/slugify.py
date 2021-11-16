@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from django.utils.text import slugify as django_slugify
 
 try:

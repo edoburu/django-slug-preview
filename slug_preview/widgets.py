@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 import re
 
 from django.conf import settings
@@ -25,14 +24,14 @@ class SlugPreviewWidget(widgets.TextInput):
         )
 
     def __init__(self, attrs=None, url_format=None):
-        super(SlugPreviewWidget, self).__init__(attrs=attrs)
+        super().__init__(attrs=attrs)
         self.url_format = url_format
         self.instance = None   # assigned via BoundSlugField
 
     def render(self, name, value, attrs=None, **kwargs):
         if attrs is None:
             attrs = {}
-        input_tag = super(SlugPreviewWidget, self).render(name, value, attrs=attrs, **kwargs)
+        input_tag = super().render(name, value, attrs=attrs, **kwargs)
         return format_html('<kbd class="slugpreview">{0}</kbd>', self.render_preview(input_tag))
 
     def render_preview(self, input_tag):
@@ -42,7 +41,7 @@ class SlugPreviewWidget(widgets.TextInput):
             if self.instance is not None and hasattr(self.instance, 'get_absolute_url_format'):
                 url_format = self.instance.get_absolute_url_format()
             else:
-                url_format = u'/{slug}/'
+                url_format = '/{slug}/'
 
         before, after = url_format.split('{slug}', 2)
         return format_html(

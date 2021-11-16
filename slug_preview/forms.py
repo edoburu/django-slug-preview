@@ -5,13 +5,13 @@ from .slugify import slugify, django_slugify
 from .validators import ValidateSlug
 
 
-class SlugPreviewFormMixin(object):
+class SlugPreviewFormMixin:
     """
     Form Mixin to add necessary integration for the SlugPreviewField.
     This extends the default ``form[field]`` interface that produces the BoundField for HTML templates.
     """
     def __getitem__(self, item):
-        boundfield = super(SlugPreviewFormMixin, self).__getitem__(item)
+        boundfield = super().__getitem__(item)
         if isinstance(boundfield.field, SlugPreviewField):
             boundfield.__class__ = _upgrade_boundfield_class(boundfield.__class__)
         return boundfield
@@ -27,7 +27,7 @@ class BoundSlugField(BoundField):
             widget = self.field.widget
 
         widget.instance = self.form.instance  # Widget needs ability to fill in the blanks.
-        return super(BoundSlugField, self).as_widget(widget=widget, attrs=attrs, only_initial=only_initial)
+        return super().as_widget(widget=widget, attrs=attrs, only_initial=only_initial)
 
 
 UPGRADED_CLASSES = {}
@@ -44,7 +44,7 @@ def _upgrade_boundfield_class(cls):
         return UPGRADED_CLASSES[cls]
     except KeyError:
         # Create once
-        new_cls = type('BoundSlugField_{0}'.format(cls.__name__), (cls, BoundSlugField), {})
+        new_cls = type(f'BoundSlugField_{cls.__name__}', (cls, BoundSlugField), {})
         UPGRADED_CLASSES[cls] = new_cls
         return new_cls
 
@@ -72,12 +72,12 @@ class SlugPreviewField(forms.SlugField):
             # This replaces the 'default_validators' setting at object level.
             self.default_validators = [ValidateSlug(self.slugify)]
 
-        super(SlugPreviewField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.widget.url_format = self.url_format
 
     def widget_attrs(self, widget):
         # Expose the form field settings to HTML
-        attrs = super(SlugPreviewField, self).widget_attrs(widget)
+        attrs = super().widget_attrs(widget)
         attrs.update({
             'data-populate-from': self.populate_from,
             'data-url-format': self.url_format,
