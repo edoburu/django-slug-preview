@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+
 from .slugify import slugify
 
 
@@ -11,9 +12,10 @@ class ValidateSlug:
     It should be used instead of the standard slug validators,
     because these only accept what the standard Django slugify() can process.
     """
+
     slugify = slugify
-    message = _('Enter a valid slug.')
-    code = 'invalid'
+    message = _("Enter a valid slug.")
+    code = "invalid"
 
     def __init__(self, slugify=None, message=None, code=None):
         if slugify is not None:

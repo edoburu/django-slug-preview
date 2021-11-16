@@ -1,8 +1,9 @@
 from django.conf import settings
 from django.db import models
 from django.utils.encoding import force_str
+
 from . import forms
-from .slugify import slugify, django_slugify
+from .slugify import django_slugify, slugify
 from .validators import ValidateSlug
 
 
@@ -10,11 +11,14 @@ class SlugPreviewField(models.SlugField):
     """
     Slug field that also displays a preview.
     """
+
     def __init__(self, *args, **kwargs):
-        self.populate_from = kwargs.pop('populate_from', None)  # nice idea from django-autoslug, but used differently.
-        self.always_update = kwargs.pop('always_update', False)
-        self.slugify = kwargs.pop('slugify', slugify)
-        self.url_format = kwargs.pop('url_format', None)
+        self.populate_from = kwargs.pop(
+            "populate_from", None
+        )  # nice idea from django-autoslug, but used differently.
+        self.always_update = kwargs.pop("always_update", False)
+        self.slugify = kwargs.pop("slugify", slugify)
+        self.url_format = kwargs.pop("url_format", None)
 
         if self.slugify != django_slugify:
             # This replaces the 'default_validators' setting at object level.
@@ -25,11 +29,11 @@ class SlugPreviewField(models.SlugField):
     def formfield(self, **kwargs):
         # Pass our custom settings to the form field
         defaults = {
-            'form_class': forms.SlugPreviewField,
-            'populate_from': self.populate_from,
-            'always_update': self.always_update,
-            'slugify': self.slugify,
-            'url_format': self.url_format,
+            "form_class": forms.SlugPreviewField,
+            "populate_from": self.populate_from,
+            "always_update": self.always_update,
+            "slugify": self.slugify,
+            "url_format": self.url_format,
         }
         defaults.update(kwargs)
         return super().formfield(**defaults)
@@ -54,7 +58,7 @@ class SlugPreviewField(models.SlugField):
             value = force_str(value)
             slug = self.slugify(value)
             if self.max_length < len(slug):
-                slug = slug[:self.max_length]
+                slug = slug[: self.max_length]
 
         # make the updated slug available as instance attribute
         setattr(instance, self.name, slug)
@@ -62,12 +66,14 @@ class SlugPreviewField(models.SlugField):
 
     def south_field_triple(self):
         from south.modelsinspector import introspector
+
         path = f"{self.__class__.__module__}.{self.__class__.__name__}"
         args, kwargs = introspector(self)
         return (path, args, kwargs)
 
 
 # Avoid using AdminTextInputWidget
-if 'django.contrib.admin' in settings.INSTALLED_APPS:
+if "django.contrib.admin" in settings.INSTALLED_APPS:
     from django.contrib.admin import options
+
     options.FORMFIELD_FOR_DBFIELD_DEFAULTS[SlugPreviewField] = {}
